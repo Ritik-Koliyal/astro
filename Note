@@ -1,0 +1,53 @@
+## Astrologer-User Distribution Service Documentation
+
+1. Project Overview -> This project dynamically distributes users to astrologers based on their current load. Top astrologers can handle more users than normal astrologers. It provides endpoints to toggle an astrologer’s "Top" status and distribute users efficiently.
+
+2. Setup Instructions ->
+   a. Prerequisites
+   b. Node.js (version 12+)
+   c. npm (or yarn)
+
+3. Open the root directory on vs code or other code editor ->
+4. open terminal or cmd
+5. run command ->
+   npm i express jest --save
+
+6. Main Components/Features
+
+7. User-Astrologer Distribution Logic (distributionService.js)
+   This service distributes users to astrologers based on their current load.
+   Top astrologers can handle up to 20% more users.
+   Astrologers are sorted by their load, and users are assigned to the least-loaded astrologer.
+8. Astrologer Management (astrologerController.js)
+   Toggle the status of an astrologer between "Top" and "Normal".
+   The system randomly assigns about 30% of astrologers as "Top" astrologers at the start.
+9. User Distribution Endpoint (userController.js)
+   Distribute users to astrologers through the /distributeUsers API endpoint.
+
+10. API Documentation
+
+11. Toggle Top Astrologer
+    Endpoint: POST /api/astrologers/toggleTopAstrologer/:id
+    Description: Toggles the isTopAstrologer status of an astrologer.
+    Params:
+    id: The ID of the astrologer to toggle.
+    Response:
+    Success: { message: "Astrologer [name] is now Top/Normal Astrologer" }
+    Failure: { message: "Astrologer not found" }
+12. Distribute Users to Astrologers
+    Endpoint: POST /api/users/distributeUsers
+    Description: Distributes users dynamically to astrologers.
+    Response:
+    Success: { message: "Users distributed successfully" }
+
+13. Context/State Management
+    Astrologers and users are mock data generated in the astrologerModel.js and userModel.js files.
+    Distribution of users is handled dynamically based on their current flow and "Top" status.
+14. User Flow
+    Admin: Can toggle the status of astrologers between "Top" and "Normal" using the /toggleTopAstrologer/:id route.
+    System: Automatically distributes users to astrologers through the /distributeUsers route, ensuring balanced user distribution.
+15. Common Errors/Issues
+    Astrologer Not Found: If an invalid astrologer ID is passed, a 404 error is returned with the message "Astrologer not found."
+
+16. for chek the test cases ->
+    open terminal and run cmd -> npm test
